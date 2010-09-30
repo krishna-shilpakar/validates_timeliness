@@ -44,7 +44,7 @@ module ValidatesTimeliness
       value = parse(raw_value) if value.is_a?(String) || options[:format]
       value = type_cast_value(value, @type)
 
-      return record.errors.add(attr_name, :"invalid_#{@type}") if value.blank?
+      return record.errors.add(attr_name, options[:"invalid_#{@type}_message"] || :"invalid_#{@type}") if value.blank?
 
       @restrictions_to_check.each do |restriction|
         begin
